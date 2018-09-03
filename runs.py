@@ -6,35 +6,42 @@ import copy
 
 runlist = ["jan14", "jan15", "jan16", "jan17", "may", "june"]
 
+monthDict = {1:"Jan",2:"Feb",3:"Mar",4:"Apr",5:"May",6:"Jun",7:"Jul",8:"Aug",9:"Sep",10:"Oct",11:"Nov",12:"Dec"}
+
 class Run:
-	def __init__(self, locn):
-		self.locn = locn
-	
-	def ext(self, band):
-		if band == 'u' or band == 'b':
-			return self.extb
-		if band == 'g':
-			return self.extg
-		if band == 'r' or band == 'i' or band == 'z':
-			return self.extr
-			
-	def exterr(self, band):
-		if band == 'u' or band == 'b':
-			return self.extberr
-		if band == 'g':
-			return self.extgerr
-		if band == 'r' or band == 'i' or band == 'z':
-			return self.extrerr
-	
+    def __init__(self, locn):
+        self.locn = locn
+    
+    def ext(self, band):
+        if band == 'u' or band == 'b':
+            return self.extb
+        if band == 'g':
+            return self.extg
+        if band == 'r' or band == 'i' or band == 'z':
+            return self.extr
+            
+    def exterr(self, band):
+        if band == 'u' or band == 'b':
+            return self.extberr
+        if band == 'g':
+            return self.extgerr
+        if band == 'r' or band == 'i' or band == 'z':
+            return self.extrerr
+    
+    def dateMNRAS(self):
+        y,m,d = self.date.split('-')
+        mStr = monthDict[int(m)]
+        return " ".join((d,mStr,y))
+    
 may = Run("/storage/astro2/phulbz/ucam/2015-05-23/run025")
 may.name = "may"
 may.obsname = 'WHT'
 may.filters = "ugr"
 may.date = "2015-05-23"
 may.numec = 6
-may.exp = 2.472819			#exposures in seconds
+may.exp = 2.472819          #exposures in seconds
 may.extr = 0.0841525
-may.extg = 0.14845998		
+may.extg = 0.14845998       
 may.extb = 0.4290130
 may.extrerr = 0.0005506
 may.extgerr = 0.000474460
@@ -121,6 +128,64 @@ june.extb = 0.4406133
 june.extrerr = 0.00024594
 june.extgerr = 0.0002086
 june.extberr = 0.0012520
+
+
+mar12 = Run("/storage/astro2/phulbz/uspec/2016-03-12/run028")
+mar12.name = "mar12"
+mar12.obsname = 'TNT'
+mar12.filters = "KG5"
+mar12.date = "2016-03-12"
+mar12.numec = 1
+
+mar13 = Run("/storage/astro2/phulbz/uspec/2016-03-13/run044")
+mar13.name = "mar13"
+mar13.obsname = 'TNT'
+mar13.filters = "KG5"
+mar13.date = "2016-03-13"
+mar13.numec = 2
+
+mar14 = Run("/storage/astro2/phulbz/uspec/2016-03-14/run055")
+mar14.name = "mar14"
+mar14.obsname = 'TNT'
+mar14.filters = "KG5"
+mar14.date = "2016-03-14"
+mar14.numec = 3
+
+mar15 = Run("/storage/astro2/phulbz/uspec/2016-03-15/run031")
+mar15.name = "mar15"
+mar15.obsname = 'TNT'
+mar15.filters = "g"
+mar15.date = "2016-03-15"
+mar15.numec = 2
+
+aug06 = Run("/storage/astro2/phulbz/gaia14aae/chimera")
+aug06.name = "aug06"
+aug06.obsname = '200-in'
+aug06.filters = "gr"
+aug06.date = "2016-08-06"
+aug06.numec = 7
+
+aug07 = Run("/storage/astro2/phulbz/gaia14aae/chimera")
+aug07.name = "aug07"
+aug07.obsname = '200-in'
+aug07.filters = "gr"
+aug07.date = "2016-08-07"
+aug07.numec = 6
+
+aug08 = Run("/storage/astro2/phulbz/gaia14aae/chimera")
+aug08.name = "aug08"
+aug08.obsname = '200-in'
+aug08.filters = "gr"
+aug08.date = "2016-08-08"
+aug08.numec = 6
+
+feb21 = Run("/storage/astro2/phulbz/uspec/2016-03-15/gaia14aae")
+feb21.name = "feb21"
+feb21.obsname = 'TNT'
+feb21.filters = "KG5"
+feb21.date = "2017-02-21"
+feb21.numec = 1
+
 
 
 eclnums = {\
@@ -223,7 +288,99 @@ eclnums = {\
 "june-1" : 22, \
 "june-2" : 23, \
 "june-3" : 24, \
-"june-4" : 25 \
+"june-4" : 25, \
+"mar12-1" : 26, \
+"mar13-1" : 27, \
+"mar13-2" : 28, \
+"mar14-1" : 29, \
+"mar14-2" : 30, \
+"mar14-3" : 31, \
+"mar15-1" : 32, \
+"mar15-2" : 33, \
+"aug06-r-1" : 34, \
+"aug06-r-2" : 35, \
+"aug06-r-3" : 36, \
+"aug06-r-4" : 37, \
+"aug06-r-5" : 38, \
+"aug06-r-6" : 39, \
+"aug06-r-7" : 40, \
+"aug06-g-1" : 34, \
+"aug06-g-2" : 35, \
+"aug06-g-3" : 36, \
+"aug06-g-4" : 37, \
+"aug06-g-5" : 38, \
+"aug06-g-6" : 39, \
+"aug06-g-7" : 40, \
+"aug07-r-1" : 41, \
+"aug07-r-2" : 42, \
+"aug07-r-3" : 43, \
+"aug07-r-4" : 44, \
+"aug07-r-5" : 45, \
+"aug07-r-6" : 46, \
+"aug07-g-1" : 41, \
+"aug07-g-2" : 42, \
+"aug07-g-3" : 43, \
+"aug07-g-4" : 44, \
+"aug07-g-5" : 45, \
+"aug07-g-6" : 46, \
+"aug08-r-1" : 47, \
+"aug08-r-2" : 48, \
+"aug08-r-3" : 49, \
+"aug08-r-4" : 50, \
+"aug08-r-5" : 51, \
+"aug08-r-6" : 52, \
+"aug08-g-1" : 47, \
+"aug08-g-2" : 48, \
+"aug08-g-3" : 49, \
+"aug08-g-4" : 50, \
+"aug08-g-5" : 51, \
+"aug08-g-6" : 52, \
+"aug06-1" : 34, \
+"aug06-2" : 35, \
+"aug06-3" : 36, \
+"aug06-4" : 37, \
+"aug06-5" : 38, \
+"aug06-6" : 39, \
+"aug06-7" : 40, \
+"aug07-1" : 41, \
+"aug07-2" : 42, \
+"aug07-3" : 43, \
+"aug07-4" : 44, \
+"aug07-5" : 45, \
+"aug07-6" : 46, \
+"aug08-1" : 47, \
+"aug08-2" : 48, \
+"aug08-3" : 49, \
+"aug08-4" : 50, \
+"aug08-5" : 51, \
+"aug08-6" : 52, \
+"feb21-1" : 53, \
 }
 
+def flattenEclnum(eclname):
+    eclnum = eclnums[eclname]
+    if eclnum >= 34:
+        eclnum -= 33
+    elif eclnum >= 26:
+        eclnum -= 25
+    return eclnum
+
 runoblist = [jan14, jan15, jan16, jan17, may, june]
+runoblistTotal = [jan14, jan15, jan16, jan17, may, june, mar12, mar13, mar14, mar15, aug06, aug07, aug08, feb21]
+
+def findRun(eclname):
+    """ Find run object given the eclipse name (or run name eg mar12)
+    """
+    for run in runoblistTotal:
+        if run.name == eclname.split('-')[0]:
+            return run
+    raise IOError("Unable to find run %s"%(eclname))
+
+
+def findEclname(eclnum):
+    for k, v in eclnums.iteritems():
+        if v == eclnum:
+            return k
+            
+
+

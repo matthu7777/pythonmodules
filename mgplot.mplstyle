@@ -1,4 +1,7 @@
 errorbar.capsize : 0
 text.usetex : True
-font.family : 'serif'
+font.family : serif
 font.size : 16
+font.weight : normal
+
+

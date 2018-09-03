@@ -4,59 +4,71 @@ import numpy as np
 import mgutils as mg
 
 class Star:
-	def __init__(self, name):
-		self.name = name
-	
-	def coloursFromSDSS(self,string):
-		split = string.split()
-		
-		self.r = float(split[0])
-		self.g = float(split[2]) + self.r
-		self.u = float(split[1]) + self.g
-		self.i = self.r - float(split[3])
-		self.z = self.i - float(split[4])
-		self.rerr = float(split[5])
-		self.gerr = np.sqrt( float(split[7])**2 + self.rerr**2)
-		self.uerr = np.sqrt( float(split[6])**2 + self.gerr**2)
-		self.ierr = np.sqrt( float(split[8])**2 + self.rerr**2)
-		self.zerr = np.sqrt( float(split[9])**2 + self.ierr**2)
-	
-	def magsFromSDSSNavi(self, string):
-		split = string.split()
-		
-		self.u = float(split[0])
-		self.g = float(split[1])
-		self.r = float(split[2])
-		self.i = float(split[3])
-		self.uerr = float(split[4])
-		self.gerr = float(split[5])
-		self.rerr = float(split[6])
-		self.ierr = float(split[7])
-	
-	
-	def mag(self,band):
-		if band == 'u' or band == 'b':
-			return self.u
-		if band == 'g':
-			return self.g
-		if band == 'r':
-			return self.r
-		if band == 'i':
-			return self.i
-		if band == 'z':
-			return self.z
-	
-	def magerr(self,band):
-		if band == 'u' or band == 'b':
-			return self.uerr
-		if band == 'g':
-			return self.gerr
-		if band == 'r':
-			return self.rerr
-		if band == 'i':
-			return self.ierr
-		if band == 'z':
-			return self.zerr
+    def __init__(self, name):
+        self.name = name
+    
+    def coloursFromSDSS(self,string):
+        split = string.split()
+        
+        self.r = float(split[0])
+        self.g = float(split[2]) + self.r
+        self.u = float(split[1]) + self.g
+        self.i = self.r - float(split[3])
+        self.z = self.i - float(split[4])
+        self.rerr = float(split[5])
+        self.gerr = np.sqrt( float(split[7])**2 + self.rerr**2)
+        self.uerr = np.sqrt( float(split[6])**2 + self.gerr**2)
+        self.ierr = np.sqrt( float(split[8])**2 + self.rerr**2)
+        self.zerr = np.sqrt( float(split[9])**2 + self.ierr**2)
+    
+    def magsFromSDSSNavi(self, string):
+        split = string.split()
+        if len(split) == 8:
+            self.u = float(split[0])
+            self.g = float(split[1])
+            self.r = float(split[2])
+            self.i = float(split[3])
+            self.uerr = float(split[4])
+            self.gerr = float(split[5])
+            self.rerr = float(split[6])
+            self.ierr = float(split[7])
+        elif len(split) == 10:
+            self.u = float(split[0])
+            self.g = float(split[1])
+            self.r = float(split[2])
+            self.i = float(split[3])
+            self.z = float(split[4])
+            self.uerr = float(split[5])
+            self.gerr = float(split[6])
+            self.rerr = float(split[7])
+            self.ierr = float(split[8])
+            self.zerr = float(split[9])
+            
+    
+    
+    def mag(self,band):
+        if band == 'u' or band == 'b':
+            return self.u
+        if band == 'g':
+            return self.g
+        if band == 'r':
+            return self.r
+        if band == 'i':
+            return self.i
+        if band == 'z':
+            return self.z
+    
+    def magerr(self,band):
+        if band == 'u' or band == 'b':
+            return self.uerr
+        if band == 'g':
+            return self.gerr
+        if band == 'r':
+            return self.rerr
+        if band == 'i':
+            return self.ierr
+        if band == 'z':
+            return self.zerr
 
 
 
@@ -76,23 +88,30 @@ feige22 = Star("Feige 22")
 feige22.coloursFromSDSS("13.024      0.050     -0.333     -0.303     -0.273         0.001      0.004      0.002      0.002      0.004")
 feige22.coords = "02:30:16.62      +05:15:50.6"
 
+sa92502 = Star("SA 92-502")
+sa92502.coloursFromSDSS("11.712      1.031      0.289      0.078      0.010         0.002      0.005      0.004      0.003      0.004")
+sa92502.coords = "00:56:08.13   +01:04:25.1"
+
+
+
+
 
 
 comp2 = Star("Comp2")
 comp2.coords = gaia.coords
-comp2.magsFromSDSSNavi("17.89 	16.19 	15.62 	15.46	0.01 	0.00 	0.00 	0.00")
+comp2.magsFromSDSSNavi("17.89   16.19   15.62   15.46   0.01    0.00    0.00    0.00")
 
 comp3 = Star("Comp3")
 comp3.coords = gaia.coords
-comp3.magsFromSDSSNavi("17.52 	15.45 	14.62 	14.34	0.01 	0.00 	0.00 	0.00")
+comp3.magsFromSDSSNavi("17.52   15.45   14.62   14.34   0.01    0.00    0.00    0.00")
 
 comp5 = Star("Comp5")
 comp5.coords = gaia.coords
-comp5.magsFromSDSSNavi("16.18 	14.32 	13.65 	13.66	0.01 	0.00 	0.01 	0.00")
+comp5.magsFromSDSSNavi("16.18   14.32   13.65   13.66   0.01    0.00    0.01    0.00")
 
 comp7 = Star("Comp7")
 comp7.coords = gaia.coords
-comp7.magsFromSDSSNavi("17.74 	16.21 	15.61 	15.38	0.01 	0.00 	0.00 	0.00")
+comp7.magsFromSDSSNavi("17.74   16.21   15.61   15.38   0.01    0.00    0.00    0.00")
 
 
 
