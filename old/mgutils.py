@@ -217,7 +217,6 @@ def functApp(funct, *args):
             err.append(arg)
     var = np.array(var)
     err = np.array(err)
-    err = np.array(err)
     
     #Find the 'expected' result
     result = funct(*var)

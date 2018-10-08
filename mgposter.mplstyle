@@ -1,8 +1,5 @@
 errorbar.capsize : 0
 text.usetex : True
 font.family : serif
-font.size : 16
-font.weight : normal
-lines.linewidth : 1
-
-
+font.size : 30
+lines.linewidth : 3
