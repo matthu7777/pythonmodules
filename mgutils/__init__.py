@@ -288,23 +288,6 @@ def iterativeFit(funct, x, y, yerr=None, numMask=0, maskLim=3, p0=None, inmask=N
     x = np.array(x) # in case passed in as non-numpy arrays
     y = np.array(y)
     
-    if bounds is not None:
-        # I hate this -- there are better ways
-        # Define a new function that acts like the old function within bounds but shoots off outside of bounds
-        def applyBounds(funct, bounds):
-            
-            def newFunct(x,*p):
-                pen = 0
-                for thisp, lo, hi in zip(p, bounds[0], bounds[1]):
-                    if thisp < lo:
-                        pen += np.abs(lo - thisp)*1e20
-                    elif thisp > hi:
-                        pen += np.abs(hi - thisp)*1e20
-                return funct(x,*p) + pen
-            return newFunct
-        funct = applyBounds(funct, bounds)
-    
-    
     
     ## Iterate over number of masked points requested
     popt, pcov = curve_fit(funct, x[mask], y[mask], sigma=sigma, p0=p0, *args, **kwargs)
