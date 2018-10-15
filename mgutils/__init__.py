@@ -195,12 +195,10 @@ def quad(*args):
     args = np.array(args)
     return np.sqrt(np.sum(args**2))
 
-def functApp(funct, *args):
+def functApp(funct, *args, verbose=False, plus=True, minus=True):
     """ Functional approach on an arbitrary function. Usage: functApp(funct, a, aerr, b, berr ...). 
-        BEWARE: Basically no (programming) error handling as of yet
+        Use 'plus' and 'minus' to toggle whether you want to propogate by adding to the values or subtracting, or both and average.
     """
-    plus, minus = True, True
-    verbose = True
     var, err = [], []
     if len(args) % 2 != 0:
         # If odd number of args passed -- ie if they've missed off an error or something
@@ -260,7 +258,8 @@ def functApp(funct, *args):
             diffs.append(d1)
         diffs = np.array(diffs)
     
-    print ("Error contributions:", diffs)
+    if verbose:
+        print ("Error contributions:", diffs)
     # combine error contributions in quadrature
     return result, quad(diffs)
     
