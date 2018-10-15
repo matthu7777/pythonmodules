@@ -142,6 +142,17 @@ def findQMcAllisterC(eps,epserr):
         return a + b*(eps-c)
     return functApp(calculate,0.135,0.004,5.0,0.7,0.025,0,eps,epserr,)
 
+def saha(T,E=5.11,g1=1,g2=1,pe=100):
+    """ Saha equation for ionisation. Predicts n2/n1 * the electron density, where n is the number of particles at any ionisation level. 
+        E is the difference between energy levels, g is the 'degeneracy' of that ion.
+        pe is the electron pressure -- between 0.1 and 100 N/m2
+    """
+    l = np.sqrt(co.h**2 / 2 / np.pi / co.me / co.kB / T)
+    #return 2/l**3 * np.exp(-E*co.eV/co.kB/T) * g2 / g1
+    return 2*co.kB*T/pe /l**3 * g2 / g1 * np.exp(-E*co.eV/co.kB/T)
+    
+    
+    
 
 ######### Magnitudes and colours        #########################
 
